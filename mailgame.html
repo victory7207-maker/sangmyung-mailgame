@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메일 왔습니다!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+    <div id="game-container">
+
+        <header>
+            <h1>메일 왔습니다!</h1>
+            <div id="status-bar">
+                <span><strong>명성:</strong> <span id="fame-score">0</span></span>
+                <span><strong>악명:</strong> <span id="notoriety-score">0</span></span>
+                <span><strong>오염도:</strong> <span id="corruption-level">0</span>%</span>
+                <span><strong>재화:</strong> <span id="money">10000</span>원</span>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <nav id="left-nav">
+                <ul>
+                    <li><button id="nav-mail" class="active">메일함</button></li>
+                    <li><button id="nav-blog">블로그</button></li>
+                    <li><button id="nav-news">뉴스/기사</button></li>
+                    <li><button id="nav-shop">쇼핑</button></li>
+                </ul>
+            </nav>
+
+            <div id="view-port">
+                <section id="mail-view" class="view active">
+                    <h2>메일함</h2>
+                    <div class="mail-box">
+                        <h3>새로 온 메일</h3>
+                        <ul id="mail-list">
+                            <li class="mail-item corporate"><span>[기업 의뢰]</span> 웹사이트 보안 점검 요청</li>
+                            <li class="mail-item personal"><span>[개인 의뢰]</span> 비밀번호를 잊어버렸어요.</li>
+                            <li class="mail-item ad"><span>(광고)</span> 최고의 수익률을 보장합니다!</li>
+                        </ul>
+                    </div>
+                    <div id="mail-content-view">
+                        <p>메일을 선택하여 내용을 확인하세요.</p>
+                    </div>
+                </section>
+
+                <section id="blog-view" class="view">
+                    <h2>주인공의 블로그</h2>
+                    <article>
+                        <h3>보안 의뢰 받기 시작한 썰</h3>
+                        <p>PC방 사장님을 도와드린 것을 계기로...</p>
+                    </article>
+                    <div id="log-history">
+                        <h3>처리한 메일 기록</h3>
+                        </div>
+                </section>
+
+                <section id="news-view" class="view">
+                    <h2>뉴스/기사</h2>
+                    <article id="news-article">
+                        <h3>최근 사이버 범죄 급증... 각별한 주의 요구</h3>
+                        <p>경찰청 통계에 따르면...</p>
+                    </article>
+                </section>
+
+                <section id="shop-view" class="view">
+                    <h2>쇼핑</h2>
+                    <div id="item-list">
+                        <div class="shop-item">
+                            <p><strong>백신 프로그램</strong>: 오염도를 5% 낮춰줍니다.</p>
+                            <button>구매하기 (5,000원)</button>
+                        </div>
+                        <div class="shop-item">
+                            <p><strong>웹페이지 스킨</strong>: 내 웹페이지를 꾸밀 수 있습니다.</p>
+                            <button>구매하기 (10,000원)</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside id="ad-sidebar">
+                <h3>광고</h3>
+                <div id="ad-banner-1" class="ad-item">
+                    <p>(광고) 클릭! 행운을 잡으세요!</p>
+                </div>
+                <div id="ad-banner-2" class="ad-item">
+                     <p>(광고) 주식 리딩방 참여하기</p>
+                </div>
+            </aside>
+
+        </main>
+        
+        <div id="corruption-overlay"></div>
+
+    </div>
+</body>
+</html>
