@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
 
             // 3. 클릭된 버튼에 해당하는 뷰를 찾아서 'active' 클래스 추가하여 보여줌
-            // 예: id 'nav-mail' 버튼은 'mail-view'를 보여줌
             const targetViewId = button.id.replace('nav-', '') + '-view';
             const targetView = document.getElementById(targetViewId);
             if (targetView) {
@@ -26,4 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // (참고) 다음 단계:
+    // 이곳에 2주차 목표인 '게임 루프' 관련 코드를 작성하면 됩니다.
+    // 예: 메일 클릭 이벤트, 스탯 변경 함수, 엔딩 조건 확인 함수 등
 });
