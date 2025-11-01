@@ -1,107 +1,74 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메일 왔습니다!</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/main.js"></script>
-</head>
-<body>
-    <div id="game-container">
+/* 메일 목록 스타일 */
+.mail-item {
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-left-width: 5px;
+    cursor: pointer;
+}
+.mail-item:hover { background-color: #f9f9f9; }
 
-        <header>
-            <h1>메일 왔습니다!</h1>
-            <div id="status-bar">
-                <span><strong>명성:</strong> <span id="fame-score">0</span></span>
-                <span><strong>업보:</strong> <span id="karma-score">0</span></span>
-                <span><strong>오염도:</strong> <span id="corruption-level">0</span>%</span>
-                <span><strong>재화:</strong> <span id="money">10000</span>원</span>
-            </div>
-        </header>
+/* 추가: 기획서 기반 메일 유형별 색상 */
+.mail-personal { border-left-color: #f0ad4e; } /* 개인(노랑) */
+.mail-corporate { border-left-color: #0275d8; } /* 기업(파랑) */
+.mail-ad { border-left-color: #5cb85c; }       /* 광고(초록) */
 
-        <main id="main-content">
-            <nav id="left-nav">
-                <ul>
-                    <li><button id="nav-mail" class="active">메일함</button></li>
-                    <li><button id="nav-blog">블로그</button></li>
-                    <li><button id="nav-news">뉴스/기사</button></li>
-                    <li><button id="nav-shop">쇼핑</button></li>
-                </ul>
-            </nav>
+/* ... (네비게이션, 뷰포트 등 이전 스타일 동일) ... */
 
-            <div id="view-port">
-                <section id="mail-view" class="view active">
-                    <h2>메일함</h2>
-                    <div class="mail-box">
-                        <h3>새로 온 메일 (초기 4개)</h3>
-                        <ul id="mail-list">
-                            <li class="mail-item mail-personal"><span>[개인 의뢰]</span> 강아지를 찾아주세요.</li>
-                            <li class="mail-item mail-personal"><span>[개인 의뢰]</span> PC방 알바생입니다.</li>
-                            <li class="mail-item mail-ad"><span>(광고)</span> 주식으로 10억 만들기</li>
-                            <li class="mail-item mail-ad"><span>(광고)</span> 완벽한 미모를 만드는 비결</li>
-                            </ul>
-                    </div>
-                    <div id="mail-content-view">
-                        <p>메일을 선택하여 내용을 확인하세요.</p>
-                    </div>
-                </section>
+/* 추가: 블로그 일기장 스타일 */
+#diary-section {
+    margin-bottom: 20px;
+}
+#diary-section textarea {
+    width: 95%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+#post-list .diary-post {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.heart-count {
+    color: #dc3545;
+}
 
-                <section id="blog-view" class="view">
-                    <h2>주인공의 블로그</h2>
-                    <div id="diary-section">
-                        <h3>나의 일기장</h3>
-                        <textarea id="diary-input" placeholder="오늘의 일기를 작성해보세요..."></textarea>
-                        <button id="post-diary-btn">게시글 작성</button>
-                    </div>
-                    <div id="post-list">
-                        <h4>게시글</h4>
-                        <article class="diary-post">
-                            <p>PC방 사장님을 도와드렸다.</p>
-                            <span class="heart-count">❤️ <span id="post-1-hearts">0</span></span>
-                        </article>
-                    </div>
-                    <div id="log-history">
-                        <h3>처리한 메일 기록 (로그)</h3>
-                        </div>
-                </section>
 
-                <section id="news-view" class="view">
-                    <h2>뉴스/기사</h2>
-                    <article id="news-article">
-                        <h3>최근 사이버 범죄 급증... 각별한 주의 요구</h3>
-                        <p>경찰청 통계에 따르면...</p>
-                    </article>
-                </section>
+/* ... (광고 사이드바, 오염도 오버레이 동일) ... */
 
-                <section id="shop-view" class="view">
-                    <h2>쇼핑</h2>
-                    <div id="item-list">
-                        </div>
-                </section>
-            </div>
+/* 추가: 엔딩 화면 스타일 */
+.ending-screen {
+    display: none; /* 평소엔 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    z-index: 1000;
 
-            <aside id="ad-sidebar">
-                </aside>
-        </main>
-        
-        <div id="corruption-overlay"></div>
-
-        <div id="ending-employment" class="ending-screen">
-            <h2>- 취업 엔딩 -</h2>
-            <p>당신의 실력을 눈여겨본 기업에서 입사 제의 메일이 도착했다!</p>
-            <button class="restart-btn">다시 시작하기</button>
-        </div>
-        <div id="ending-arrest" class="ending-screen">
-            <h2>- 체포 엔딩 -</h2>
-            <p>당신의 불법적인 활동이 발각되어... 고소장이 날아왔다.</p>
-            <button class="restart-btn">다시 시작하기</button>
-        </div>
-        <div id="ending-shutdown" class="ending-screen">
-            <h2>- 셧다운 엔딩 -</h2>
-            <p>컴퓨터가 심각한 오염으로 인해 완전히 정지했다.</p>
-            <button class="restart-btn">다시 시작하기</button>
-        </div>
-    </div>
-</body>
-</html>
+    /* 내용 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.ending-screen h2 {
+    font-size: 2.5em;
+    color: #ffc107;
+}
+.ending-screen p {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+.restart-btn {
+    padding: 10px 20px;
+    font-size: 1.1em;
+}
