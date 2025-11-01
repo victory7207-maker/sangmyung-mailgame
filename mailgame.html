@@ -14,7 +14,7 @@
             <h1>메일 왔습니다!</h1>
             <div id="status-bar">
                 <span><strong>명성:</strong> <span id="fame-score">0</span></span>
-                <span><strong>악명:</strong> <span id="notoriety-score">0</span></span>
+                <span><strong>업보:</strong> <span id="karma-score">0</span></span>
                 <span><strong>오염도:</strong> <span id="corruption-level">0</span>%</span>
                 <span><strong>재화:</strong> <span id="money">10000</span>원</span>
             </div>
@@ -34,12 +34,13 @@
                 <section id="mail-view" class="view active">
                     <h2>메일함</h2>
                     <div class="mail-box">
-                        <h3>새로 온 메일</h3>
+                        <h3>새로 온 메일 (초기 4개)</h3>
                         <ul id="mail-list">
-                            <li class="mail-item corporate"><span>[기업 의뢰]</span> 웹사이트 보안 점검 요청</li>
-                            <li class="mail-item personal"><span>[개인 의뢰]</span> 비밀번호를 잊어버렸어요.</li>
-                            <li class="mail-item ad"><span>(광고)</span> 최고의 수익률을 보장합니다!</li>
-                        </ul>
+                            <li class="mail-item mail-personal"><span>[개인 의뢰]</span> 강아지를 찾아주세요.</li>
+                            <li class="mail-item mail-personal"><span>[개인 의뢰]</span> PC방 알바생입니다.</li>
+                            <li class="mail-item mail-ad"><span>(광고)</span> 주식으로 10억 만들기</li>
+                            <li class="mail-item mail-ad"><span>(광고)</span> 완벽한 미모를 만드는 비결</li>
+                            </ul>
                     </div>
                     <div id="mail-content-view">
                         <p>메일을 선택하여 내용을 확인하세요.</p>
@@ -48,12 +49,20 @@
 
                 <section id="blog-view" class="view">
                     <h2>주인공의 블로그</h2>
-                    <article>
-                        <h3>보안 의뢰 받기 시작한 썰</h3>
-                        <p>PC방 사장님을 도와드린 것을 계기로...</p>
-                    </article>
+                    <div id="diary-section">
+                        <h3>나의 일기장</h3>
+                        <textarea id="diary-input" placeholder="오늘의 일기를 작성해보세요..."></textarea>
+                        <button id="post-diary-btn">게시글 작성</button>
+                    </div>
+                    <div id="post-list">
+                        <h4>게시글</h4>
+                        <article class="diary-post">
+                            <p>PC방 사장님을 도와드렸다.</p>
+                            <span class="heart-count">❤️ <span id="post-1-hearts">0</span></span>
+                        </article>
+                    </div>
                     <div id="log-history">
-                        <h3>처리한 메일 기록</h3>
+                        <h3>처리한 메일 기록 (로그)</h3>
                         </div>
                 </section>
 
@@ -68,32 +77,31 @@
                 <section id="shop-view" class="view">
                     <h2>쇼핑</h2>
                     <div id="item-list">
-                        <div class="shop-item">
-                            <p><strong>백신 프로그램</strong>: 오염도를 5% 낮춰줍니다.</p>
-                            <button>구매하기 (5,000원)</button>
                         </div>
-                        <div class="shop-item">
-                            <p><strong>웹페이지 스킨</strong>: 내 웹페이지를 꾸밀 수 있습니다.</p>
-                            <button>구매하기 (10,000원)</button>
-                        </div>
-                    </div>
                 </section>
             </div>
 
             <aside id="ad-sidebar">
-                <h3>광고</h3>
-                <div id="ad-banner-1" class="ad-item">
-                    <p>(광고) 클릭! 행운을 잡으세요!</p>
-                </div>
-                <div id="ad-banner-2" class="ad-item">
-                     <p>(광고) 주식 리딩방 참여하기</p>
-                </div>
-            </aside>
-
+                </aside>
         </main>
         
         <div id="corruption-overlay"></div>
 
+        <div id="ending-employment" class="ending-screen">
+            <h2>- 취업 엔딩 -</h2>
+            <p>당신의 실력을 눈여겨본 기업에서 입사 제의 메일이 도착했다!</p>
+            <button class="restart-btn">다시 시작하기</button>
+        </div>
+        <div id="ending-arrest" class="ending-screen">
+            <h2>- 체포 엔딩 -</h2>
+            <p>당신의 불법적인 활동이 발각되어... 고소장이 날아왔다.</p>
+            <button class="restart-btn">다시 시작하기</button>
+        </div>
+        <div id="ending-shutdown" class="ending-screen">
+            <h2>- 셧다운 엔딩 -</h2>
+            <p>컴퓨터가 심각한 오염으로 인해 완전히 정지했다.</p>
+            <button class="restart-btn">다시 시작하기</button>
+        </div>
     </div>
 </body>
 </html>
