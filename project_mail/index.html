@@ -1,10 +1,108 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset ="UFT-8">
-    <title> index.html </title>
+  <meta charset="UTF-8">
+  <title>보안 시뮬레이터 게임 : 메일왔습니다</title>
+  
+  <meta name="viewport" content="width=1280">
+  <!-- 브라우저가 HTML을 너비 1280을 기준으로 렌더링해라 -->
+  <!-- 만약이게 없더라면 브라우저가 자동으로 화면을 마음대로 렌더링해서 
+   전체 페이지가 작아지거나 글씨가 작아보이는 현상 발생. 이를 기준으로 렌더링 하므로
+   나머지 크기들도 이에 맞추어서 설정됨. 기준 해상도 설정-->
+
+  <style>
+    /* ===== 전체 배경 ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* 스크롤 막기 */
+      background-color: #0d1328;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #fff;
+    }
+    
+    .game {
+      aspect-ratio: 16 / 9;     /* 16:9 비율 유지 */
+      width: 1280px;
+      /* 초기 기준값을 설정 */
+      max-width: 100vw;
+      max-height: 100vh;
+      background: #0d1328;
+      margin : auto; 
+      /* margin : auto;는 "박스자체의 위치"를 중앙으로!! */
+      
+      /* 그 안에 내용문들을 자체 위치 조정 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===== 타이틀 ===== */
+    h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #f2f5fa;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #b4bdd3;
+      margin-bottom: 60px;
+    }
+
+    /* ===== 시작 버튼 ===== */
+    .start-btn {
+      background: #4a6fa5;
+      color: #fff;
+      font-size: 22px;
+      padding: 15px 60px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .start-btn:hover {
+      background: #6b8dc7;
+      transform: scale(1.05);
+    }
+
+    /* ===== 하단 표시 ===== */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 16px;
+      color: #7f8aa6;
+    }
+  </style>
 </head>
 <body>
-    
+  <div class="game">
+  <h1>🩵띵동~ 메일 왔습니다!!</h1>
+  
+  <p class="subtitle">당신에게 새로운 의뢰가 도착했습니다. 수락하시겠어요?</p>
+
+  <a href="main.html" class="start-btn">수락하기</a>
+  </div>
+
+  <div class="footer">
+    Team 1조 | 2025
+  </div>
+
 </body>
 </html>
