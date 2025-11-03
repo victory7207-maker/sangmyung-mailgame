@@ -1,10 +1,339 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset ="UFT-8">
-    <title> index.html </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그 템플릿</title>
+    <style>
+        /* * ----------------------------------------
+         * 전역 스타일 (Global Styles)
+         * ----------------------------------------
+         */
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            margin: 0;
+            background-color: #e6f2f2; /* 이미지의 연한 청록색 배경 */
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* * ----------------------------------------
+         * 메인 컨테이너 (Main Container)
+         * ----------------------------------------
+         */
+        .container {
+            width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* * ----------------------------------------
+         * 1. 헤더 (배너 + 프로필)
+         * ----------------------------------------
+         */
+        .header-banner {
+            height: 300px;
+            background-image: url(' ');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .profile-area {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #d1e0e0;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .profile-pic svg {
+            width: 60%;
+            height: 60%;
+            fill: #fff;
+            opacity: 0.8;
+        }
+
+        .write-button {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .write-button:hover {
+            background-color: #fff;
+        }
+
+        /* * ----------------------------------------
+         * 2. 블로그 제목/메뉴
+         * ----------------------------------------
+         */
+        .blog-title-bar {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background-color: #fcfcfc;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* * ----------------------------------------
+         * 3. 메인 콘텐츠 (2단 레이아웃)
+         * ----------------------------------------
+         */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            background-color: #f9f9f9; /* 콘텐츠 영역과 사이드바 사이의 배경 */
+        }
+
+        /* * ----------------------------------------
+         * 3-1. 왼쪽 사이드바
+         * ----------------------------------------
+         */
+        .sidebar-left {
+            width: 240px;
+            flex-shrink: 0; /* 너비 고정 */
+        }
+
+        .widget {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .widget-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            margin: 0;
+        }
+
+        /* 카테고리 위젯 */
+        .widget-content ul li {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .widget-content ul li:hover {
+            background-color: #f7f7f7;
+        }
+
+        /* 이웃 위젯 */
+        .neighbor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 12px;
+        }
+
+        .neighbor-item {
+            text-align: center;
+        }
+
+        .neighbor-pic {
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 비율 정사각형 */
+            height: 0;
+            margin-bottom: 5px;
+        }
+
+        .neighbor-name {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* 이웃 색상 샘플 */
+        .n1 { background-color: #fadadd; }
+        .n2 { background-color: #d8bfff; }
+        .n3 { background-color: #c0e7ff; }
+        .n4 { background-color: #fff5ba; }
+        .n5 { background-color: #d1b1a1; }
+        .n6 { background-color: #b0f2c2; }
+
+
+        /* * ----------------------------------------
+         * 3-2. 오른쪽 메인 콘텐츠
+         * ----------------------------------------
+         */
+        .content-main {
+            flex-grow: 1; /* 남은 공간 모두 차지 */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 30px;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .post-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            min-height: 300px;
+        }
+
+        .post-body .email-info {
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .like-button {
+            color: #ff5a5a;
+            cursor: pointer;
+        }
+        
+        .post-actions a {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-    
-</body>
+
+    <div class="container">
+        <header class="header-banner">
+            <div class="profile-area">
+                <div class="profile-pic">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                    </svg>
+                </div>
+                <div class="write-button">✎ 글쓰기</div>
+            </div>
+        </header>
+
+        <nav class="blog-title-bar">
+            a | b | c
+        </nav>
+
+        <div class="main-content">
+            
+            <aside class="sidebar-left">
+                <div class="widget">
+                    <h3 class="widget-title">카테고리</h3>
+                    <div class="widget-content">
+                        <ul>
+                            <li><a href="#">전체보기 (0)</a></li>
+                            <li><a href="#">a (0)</a></li>
+                            <li><a href="#">b (0)</a></li>
+                            <li><a href="#">c (0)</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">나를 추가한 이웃</h3>
+                    <div class="widget-content">
+                        <div class="neighbor-grid">
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n1"></div>
+                                <div class="neighbor-name">이웃1</div>
+                            </div>
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n2"></div>
+                                <div class="neighbor-name">이웃2</div>
+                            </div>
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n3"></div>
+                                <div class="neighbor-name">이웃3</div>
+                            </div>
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n4"></div>
+                                <div class="neighbor-name">이웃4</div>
+                            </div>
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n5"></div>
+                                <div class="neighbor-name">이웃5</div>
+                            </div>
+                            <div class="neighbor-item">
+                                <div class="neighbor-pic n6"></div>
+                                <div class="neighbor-name">이웃6</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content-main">
+                <article class="post">
+                    <h2 class="post-title">asdf</h2>
+                    <div class="post-body">
+                        <p>
+                            asdfsdafsdf<br>
+                            aasadasfds<br>
+                            bsdfsdfsdf
+                        </p>
+                        <p>
+                            adfdsfdsfdsf<br>
+                            bsafdsfdsf<br>
+                            csdfsdfsdfsdf
+                        </p>
+                        <p>
+                            asdfsdfdsf
+                        </p>
+
+                        <p class="email-info">
+                            asdf@mail.com
+                        </p>
+                    </div>
+                    <footer class="post-footer">
+                        <div class="like-button">
+                            ❤️ 공감 (1)
+                        </div>
+                        <div class="post-actions">
+                            <a href="#">수정</a> | <a href="#">삭제</a>
+                        </div>
+                    </footer>
+                </article>
+            </main>
+
+        </div> </div> </body>
 </html>
