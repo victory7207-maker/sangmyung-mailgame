@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <title>보안 시뮬레이터 게임 : 메일왔습니다</title>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
   <meta name="viewport" content="width=1280">
   <!-- 브라우저가 HTML을 너비 1280을 기준으로 렌더링해라 -->
   <!-- 만약이게 없더라면 브라우저가 자동으로 화면을 마음대로 렌더링해서 
@@ -12,12 +14,20 @@
 
   <style>
     /* ===== 전체 배경 ===== */
-    html, body {
+    html,
+    body {
+      /* 여백 제거 , 기본적으로 브라우저는 body에 자동여백 margin 약 8px를 부여함. 따라서
+      이를 제거하고 콘텐츠가 바로 보이도록 내부 여백까지 padding : 0을 통해서 제거함으로
+      0,0 좌표에서부터 시작되도록 설정 */
       margin: 0;
       padding: 0;
+      /* html은 코드상 최상위, viewport가 최상위 개념. 따라서 html은 viewport 내부에 렌더링 되는 첫 번째 박스 */
+      /* 이때 width는 고정으로 두고 height는 "콘텐츠 의존(auto)"로서 작용! */
+      /* 따라서 콘텐츠 크기가 아닌 화면 크기에 맞게 설정하도록 height : 100%로 설정 */
       width: 100%;
       height: 100%;
-      overflow: hidden; /* 스크롤 막기 */
+      overflow: hidden;
+      /* 스크롤 막기 */
       background-color: #0d1328;
 
       display: flex;
@@ -28,18 +38,20 @@
       font-family: 'Noto Sans KR', sans-serif;
       color: #fff;
     }
-    
+
     .game {
-      aspect-ratio: 16 / 9;     /* 16:9 비율 유지 */
-      width: 1280px;
-      /* 초기 기준값을 설정 */
-      max-width: 100vw;
-      max-height: 100vh;
-      background: #0d1328;
-      margin : auto; 
+      /* 추가로 js를 통해서 화면 크기 변화 못하도록 설정할 예정 */
+      aspect-ratio: 16 / 9;
+      /* 화면이 변화하더라도 16:9 비율 유지 */
+      /* 초기 기준값을 설정, viewport를 기준으로 100%크기로  */
+      width: 100%;
+      height: auto;
+      background-color: #0d1328;
+      margin: auto;
       /* margin : auto;는 "박스자체의 위치"를 중앙으로!! */
-      
+
       /* 그 안에 내용문들을 자체 위치 조정 */
+      /* 부모에 대해서 직계자식들만 정렬 */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -57,11 +69,15 @@
     .subtitle {
       font-size: 20px;
       color: #b4bdd3;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
     }
 
-    /* ===== 시작 버튼 ===== */
-    .start-btn {
+    a {
+      display: block;
+    }
+
+    .btn {
+      margin-bottom: 15px;
       background: #4a6fa5;
       color: #fff;
       font-size: 22px;
@@ -71,30 +87,37 @@
       cursor: pointer;
       transition: 0.3s;
       text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .start-btn:hover {
+    .btn:hover {
       background: #6b8dc7;
       transform: scale(1.05);
     }
 
     /* ===== 하단 표시 ===== */
     .footer {
+      display: flex;
       position: absolute;
       bottom: 20px;
       font-size: 16px;
       color: #7f8aa6;
     }
+
   </style>
 </head>
+
 <body>
   <div class="game">
-  <h1>🩵띵동~ 메일 왔습니다!!</h1>
-  
-  <p class="subtitle">당신에게 새로운 의뢰가 도착했습니다. 수락하시겠어요?</p>
+    <h1>🩵띵동~ 메일 왔습니다!!</h1>
 
-  <a href="main.html" class="start-btn">수락하기</a>
+    <p class="subtitle">당신에게 새로운 의뢰가 도착했습니다. 수락하시겠어요?</p>
+
+    <a href="main.html" class="start btn">수락하기</a>
+    <!-- 튜토리얼을 무조건 선택한 후에 수락하기를 선택할 수 있도록 설정할 예정 -->
+
+    <a href="tutorial.html" class="tutorial btn">게임규칙</a>
+    <!-- 추가로 로그인 입력 버튼을 만들어서 js로 정보 전달후 프로필 생성 -->
   </div>
 
   <div class="footer">
@@ -102,5 +125,7 @@
   </div>
 
 </body>
+
 </html>
+
 
