@@ -1,10 +1,143 @@
 <!DOCTYPE HTML>
 <html lang="ko">
+
 <head>
-    <meta charset ="UFT-8">
-    <title> index.html </title>
+    <meta charset="UFT-8">
+    <title> 메일 </title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=1280">
 </head>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 상단바 화면 */
+    .top {
+        height: 70px;
+        background-color: #025aa1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .l-icon {
+        font-size: 1.4em;
+    }
+
+    .r-icon {
+        display: flex;
+        gap: 1.1em;
+    }
+
+    .icon {
+        padding: 8px 10px;
+        border-left: 2px solid white;
+    }
+
+    /* 본문 영역 */
+    .bottom {
+        flex: 1;
+        display: flex;
+    }
+
+    /* 좌측 메뉴 */
+    .left {
+        width: 220px;
+        background-color: #f2f4f7;
+        border-right: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .mailwrite {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        background-color: #dbeafe;
+        border-radius: 10px;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .mailselect span {
+        display: block;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    /* 우측 메일 목록 */
+    .right {
+        flex: 1;
+        background-color: #fff;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .mails {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .mails:hover {
+        background-color: #e2e8f0;
+    }
+</style>
+
 <body>
-    
+
+    <div class="top">
+        <div class="l-icon">
+            <span class="logo">메일</span>
+        </div>
+
+        <div class="r-icon">
+            <span class="client icon">👤닉네임</span>
+            <span class="chat icon">💬</span>
+            <span class="alarm icon">🔔</span>
+            <span class="menu icon">☰</span>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="left">
+            <div class="mailwrite">
+                <span>메일 쓰기</span>
+                <span>|</span>
+                <span>내게 쓰기</span>
+            </div>
+
+            <div class="mailselect">
+                <span class="all">전체메일</span>
+                <span class="received">받은메일함</span>
+                <span class="spam">스팸메일함</span>
+                <span class="휴지통">휴지통 +999</span>
+            </div>
+        </div>
+
+        <div class="right">
+            <span class="mails"> [ 메일 제목 : / 시간 : / 용량 : / 보낸주소 : ] </span>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
