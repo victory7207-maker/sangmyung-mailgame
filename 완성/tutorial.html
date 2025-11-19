@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920,height=1080, initial-scale=1.0">
+  <title> 튜토리얼 </title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 90%;
+    background-color: #0d1328;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    color: white;
+  }
+
+  p {
+    margin: auto 20px;
+    text-align: center;
+  }
+
+  span {
+    color: yellow;
+  }
+
+  .important {
+    color: red;
+  }
+
+  .selection {
+    display: flex;
+    align-items: center;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .btn {
+    background: #4a6fa5;
+    color: #fff;
+    font-size: 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn:hover {
+    background: #6b8dc7;
+    transform: scale(1.03);
+  }
+
+  .left {
+    padding: 10px 40px;
+    margin-right: 10px;
+  }
+
+  .right {
+    padding: 10px 20px;
+  }
+</style>
+
+<body>
+
+  <h1> &lt;튜토리얼&gt;</h1>
+  <p> 안녕하세요 <strong>플레이어님</strong>, 저희 게임을 하러 와주셔서 감사합니다! </p>
+  <p> 게임을 시작하기 앞서 간단하게 플레이 방법을 설명드리겠습니다.</p>
+
+  <p> 게임을 시작하면 이런 웹페이지처럼 보이는 화면이 보일겁니다.
+    당신은 웹페이지를 자유롭게 돌아다니며 행동하실수 있고
+    ...<span>의뢰</span>를 받아 처리하는 일을 해야 합니다!</p>
+
+  <p> 왜 이런 일을 해야 하는지가 궁굼하다구요?
+    <span>블로그에서 더 자세한 이야기를 확인할 수 있을거에요.</span>
+  </p>
+
+  <p> 메일을 처리하는 방법은 간단합니다.
+    먼저 메일을 선택하고 <span>수락하기</span> 버튼을 눌러 간단한 미니게임으로 의뢰를 해결해주세요.
+    가끔 이상한 의뢰를 받을때도 있을거에요, 그때는 <span>신고하기</span> 버튼을 눌러주세요.
+    쓸데 없는 광고메일을 받았다면 <span>무시하기</span> 버튼을 눌러 삭제해 버리세요.
+  </p>
+
+  <p> 물론 어떤 버튼을 누를지는 모두 <span class="important">당신의 선택</span>에 달려있지만...</p>
+
+  <p> 당신에겐 <span>명성</span>,<span>업보</span>,<span>오염도</span>라는 보이지 않는 스탯이 있다는것을 기억해주세요.
+    당신의 행동에 따라 스탯들은 늘기도 하고 줄기도 합니다.
+    <span class="important">최종적으로는 스탯에 따라 당신의 운명이 결정되니 꼭 신경써 주세요.</span>
+  </p>
+
+  <p> 아, 만약 받은메일을 모두 처리했다면 어떻게 할까요?
+    <span>블로그에 일기를 남기면 다음날로 넘어가고 새로운 메일들을 받을수 있답니다.</span>
+    다음날로 넘어갈때는 생활비가 빠져나가니 열심히 일을 해서 돈을 벌어야 할거에요...
+  </p>
+
+  <p>이 정도면 기본적인 내용은 모두 알려드린것 같네요.</p>
+  <p>이제 메일을 받으러 가볼까요?</p>
+
+
+  <div class="selection">
+    <div class="btn left" onclick="location.href='index.html'"> 예 </div>
+    <div class="btn right"> 아니요</div>
+  </div>
+
+  <script>
+    document.querySelector('.right').addEventListener('click', function () {
+      alert("아니요를 선택하셨네요?! 흠... 개구쟁이시군요!");
+    });
+  </script>
+  <!-- <script src="sizing.js"></script> 이후에 설정 -->
+
+</body>
+
+</html>
