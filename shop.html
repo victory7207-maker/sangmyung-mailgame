@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>상점</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=1280">
+
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #ffffff;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .status {
+        display: inline-block;
+        margin: 0 20px;
+        font-size: 14px;
+    }
+
+    .banner {
+        width: 100%;
+        height: 100%;
+        padding: 100px 20px;
+        background: linear-gradient(#fbc2eb, #a6c1ee);
+        text-align: center;
+        color: white;
+        box-sizing: border-box;
+    }
+
+    .banner h1 {
+        font-size: 70px;
+        font-weight: 900;
+        margin: 10px 0;
+        letter-spacing: 5px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    .dot.active {
+        background-color: white;
+    }
+
+    .store-container {
+        width: 90%;
+        max-width: 1280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    /* 메인 화면으로 돌아가기 버튼 */
+    .back-button {
+        align-self: flex-start;
+        margin: 20px 0 10px 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: #333;
+        text-decoration: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        background-color: #cacdda;
+        border-radius: 8px;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .back-button:hover {
+        background-color: #dfe1ec;
+        transform: scale(1.05);
+    }
+
+    /* 상점 메시지 */
+    #shop-message {
+        display: none;
+        padding: 10px 20px;
+        background-color: #fff3cd;
+        color: #664d03;
+        border: 1px solid #ffecb5;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .content h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .content hr {
+        width: 80px;
+        border: 0;
+        height: 2px;
+        background-color: #555;
+        margin: 0 auto 30px auto;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    .product-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        background-color: #eee;
+    }
+    
+    /* 플레이스홀더 이미지 */
+    #item1 .product-image { background-color: #ddd; }
+    #item2 .product-image { background-image: url('https://placehold.co/300x220/228B22/FFFFFF?text=Theme+1'); background-size: cover; }
+    #item3 .product-image { background-image: url('https://placehold.co/300x220/1E90FF/FFFFFF?text=Theme+2'); background-size: cover; }
+    #item4 .product-image { background-image: url('https://placehold.co/300x220/DEB887/FFFFFF?text=Theme+3'); background-size: cover; }
+
+
+    .product-info {
+        padding: 15px;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 700;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .like-icon {
+        font-size: 20px;
+        color: #ccc;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+    <h1>GOOGOO 샵</h1>
+    <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    </div>
+    </div>
+
+    <div class="store-container">
+    
+    <a href="main.html" class="back-button"> &lt; 메인 화면으로 돌아가기</a>
+    
+    <!-- 메시지 표시 영역 -->
+    <div id="shop-message"></div>
+
+    <div class="content">
+        <h2>추천상품</h2>
+        <hr>
+
+        <div class="product-grid">
+
+        <!-- 
+          컴퓨터 수리 가격 표기:
+          실제 가격은 JS에서 계산되므로, 여기서는 기본 가격(100$) 또는 변동 가격(100$~)으로 표시합니다.
+          (가격을 동적으로 표시하려면 JS 로드 시점에 가격을 계산하여 textContent를 변경해야 함)
+        -->
+    <div id="item1" class="product-item" onclick="buyItem('computer_repair')">
+        <div class="product-image">🛡️</div>
+        <div class="product-info">
+        <span id="computer-repair-price">컴퓨터 수리 (100$~)</span>
+        </div>
+    </div>
+
+        <div id="item2" class="product-item" onclick="buyItem('blog_template_1')">
+            <div class="product-image"></div>
+            <div class="product-info">
+            <span>블로그 테마 1 (10$)</span>
+            </div>
+        </div>
+
+        <div id="item3" class="product-item" onclick="buyItem('blog_template_2')">
+            <div class="product-image"></div>
+            <div class="product-info">
+            <span>블로그 테마 2 (15$)</span>
+            </div>
+        </div>
+
+        <div id="item4" class="product-item" onclick="buyItem('blog_template_3')">
+            <div class="product-image"></div>
+            <div class="product-info">
+            <span>블로그 테마 3 (20$)</span>
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+    <!-- 인라인 스크립트 대신, JS 파일 로드 -->
+    <script src="./function/changeStat.js"></script>
+    <script src="./function/shop.js"></script>
+    <!-- <script src="./function/updateStatusBar.js"></script> (상태바가 이 페이지에 있다면 로드) -->
+
+</body>
+</html>
