@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>시스템 오류</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #0b4cff;
+            /* 블루스크린 파란색 */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            padding: 40px;
+        }
+
+        .error-box {
+            max-width: 800px;
+            line-height: 1.7;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .maintitle {
+            font-size: 90px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .desc {
+            font-size: 20px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .progress {
+            margin-top: 40px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="error-box">
+
+        <div class="maintitle">Ending : Chapter01 </div>
+
+        <div class="title">
+            PC에 문제가 발생하여 재시작해야 합니다.<br>
+            오류 수집 중입니다.
+        </div>
+
+        <div class="desc">
+            오류 코드: YOU.SHOULD.BE.CAREFUL
+            시스템이 심각한 멀웨어 활동을 감지했습니다.<br>
+            작은 부주의가 시스템 전체를 무너뜨릴 수 있습니다.
+            디지털 선택은 언제나 신중해야 합니다.
+        </div>
+
+        <div class="progress">
+            게임을 다시 시작하십시요..
+        </div>
+
+    </div>
+
+</body>
+
+</html>
