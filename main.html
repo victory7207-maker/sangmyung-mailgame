@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>메인화면</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=1920">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    @keyframes shakeScreen {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(2px, -2px);
+      }
+
+      50% {
+        transform: translate(-2px, 1px);
+      }
+
+      75% {
+        transform: translate(2px, 2px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    header {
+      background-color: black;
+      width: 100%;
+      height: 35px;
+      align-items: center;
+      text-align: right;
+      font-weight: 400;
+      color: white;
+    }
+
+    .status {
+      display: inline-block;
+      margin: 8px 20px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: 5px;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #0ad5e7, #0078ff);
+    }
+
+    .pollution {
+      text-shadow: 0.3rem 0.1rem rgba(189, 33, 106, 0.8),
+        -0.2rem -0.1rem rgba(255, 145, 0, 0.8), -0.3rem 0rem rgb(88, 75, 238);
+    }
+
+    @keyframes glitchAnim {
+     0% {
+    transform: skewX(24deg);
+  }
+  2.5% {
+    transform: skewX(-8deg);
+  } 
+  5% {
+    transform: skewX(55deg);
+  }
+  7.5% {
+    transform: skewX(-90deg);
+  }
+  10% {
+    transform: skewX(29deg);
+  }
+  12.5% {
+    transform: skewX(-90deg);
+  }
+  15% {
+    transform: skewX(3deg);
+  }
+  17.5% {
+    transform: skewX(-2deg);
+  }
+  20% {
+    transform: skewX(1deg);
+  }
+  22.5% {
+    transform: skewX(10deg);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
+    }
+
+    .search {
+      width: 80%;
+      height: 50px;
+      background-color: #e8ecec;
+      border-radius: 10px;
+      margin: 20px auto 15px auto;
+      font-size: 26px;
+      display: flex;
+      justify-content: flex-start;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .search-icon {
+      margin-right: 10px;
+      font-size: 30px;
+    }
+
+    .search-text {
+      margin: auto 0 auto 0;
+      color: #555;
+      opacity: 0.7;
+    }
+
+    .game {
+      width: 90%;
+      height: 60%;
+      background-color: #d6e0e1;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .offplayer {
+      width: 60%;
+      height: 95%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .store_ad {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nplayer-box {
+      width: 50%;
+      height: 100%;
+      border: 1px solid black;
+    }
+
+    .news {
+      width: 100%;
+      height: 60%;
+      border: 1px solid black;
+    }
+
+    .onplayer {
+      width: 35%;
+      height: 95%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+
+    }
+
+    .player-box {
+      width: 100%;
+      height: 33%;
+      border: 1px solid black;
+    }
+
+    .inside {
+      font-family: 'Noto Sans KR', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .inside:hover {
+      cursor: pointer;
+      transition: 0.3s;
+      transform: scale(1.03);
+    }
+
+    .showing img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .icon {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    #warning-text {
+      position: fixed;
+      top: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      /* left를 통해서 화면 중앙에서 출력되지만 정중앙은 아님 따라서 translate(-50%)를
+      통해서 완전히 중앙에서 출력되도록 설정 */
+      font-size: 25px;
+      font-weight: bold;
+      color: red;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 999;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 오염도에 따른 경고문구 -->
+  <div id="warning-text"></div>
+  <!-- 추후 자금과 날짜는 js로 변경예정 -->
+  <header>
+    <span class="status"> [ 날짜 : 11.06 / 자금 : 200$ ] </span>
+  </header>
+  <!-- A. 단순 보여주기용 창 -->
+  <div class="logo">GOOGOO</div>
+
+  <div class="search">
+    <span class="search-icon">🔍</span>
+    <span class="search-text">검색어를 입력하세요.</span>
+  </div>
+
+  <div class="game">
+    <!-- A. 전체 게임과 상호작용할 부분 -->
+    <div class="offplayer">
+      <!-- B. 광고,뉴스,상점이 들어갈 위치 구분 -->
+      <div class="store_ad">
+        <!-- C #1 광고 및 상점이 들어갈 위치 구분 -->
+        <div class="nplayer-box showing"><img id="adImage" src="./광고/광고1.png" alt="광고이미지"></div>
+        <div class="nplayer-box inside" onclick="location.href='shop.html'">
+          <img class="icon" src="./img/store.icon.png">
+        </div>
+      </div>
+
+      <div class="news showing">
+        <!-- C #2 뉴스가 들어갈 위치 구분 -->
+        <div class="news-box showing"></div>
+        <img id="newsImage" src="./뉴스/뉴스1.png" alt="뉴스이미지">
+      </div>
+    </div>
+
+    <div class="onplayer">
+      <!-- B. 프로필 정보 , 메일 , 블로그가 순서대로 들어갈 위치 구분 -->
+      <div class="player-box inside" onclick="location.href='profile.html'">
+        <img class="icon" src="./img/profile.icon.png">
+      </div>
+      <div class="player-box inside" onclick="location.href='mail_main.html'">
+        <img class="icon" src="./img/mail.icon.png">
+      </div>
+      <div class="player-box inside" onclick="location.href='blog.html'">
+        <img class="icon" src="./img/blog.icon.png">
+      </div>
+    </div>
+  </div>
+  <script src="./function/mainInit.js"></script>
+  <script src="./function/updateStatusBar.js"></script>
+  <script src="./function/updateAds.js"></script>
+  <script src="./function/updateNews.js"></script>
+  <script src="./function/updatePollution.js"></script>
+</body>
+
+</html>
