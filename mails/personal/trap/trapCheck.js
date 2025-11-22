@@ -20,6 +20,11 @@ function trapCheck(mailId, action) {
         pollution++;
         sessionStorage.setItem("pollution_degree", pollution);
         alert("악성코드에 감염되었습니다. 오염도가 증가합니다.");
+
+        if (pollution >= 3){
+            window.location.href="bluescreen_ending.html";
+            return;
+        }
     }
 
     else if (action === "report") {
@@ -37,4 +42,5 @@ function trapCheck(mailId, action) {
 
     // 메일창 닫고 이전 화면으로 돌아가기
     history.back();
+
 }
