@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>고소장</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            background: #e8e7e7;
+            display: flex;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        /* 메일 전체 박스 */
+        .mail-box {
+            width: 55vw;
+            min-width: 800px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            padding: 40px 50px;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            padding: 8px 16px;
+            font-size: 16px;
+            background: #ffffff;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: 0.2s;
+            user-select: none;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* 상단 정보 */
+        .mail-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        .mail-from {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .mail-title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* 본문 */
+        .mail-body {
+            margin-top: 30px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-line;
+            /* 줄바꿈 적용 */
+        }
+
+        .doc-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+
+        .doc-block p {
+            font-size: 18px;
+            margin: 4px 0;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+
+        .doc-paragraph {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+
+        .reason-list {
+            margin-left: 25px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .reason-list li {
+            margin-bottom: 15px;
+        }
+
+        #btn:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mail-box">
+
+        <div class="mail-header">
+            <div class="mail-from">보낸 사람: seoulbubwon@goomail.com</div>
+            <div class="mail-title"> 귀하에게 발부된 고소장을 전달드립니다. </div>
+        </div>
+
+        <div class="mail-body">
+
+            <div class="doc-title">고 &nbsp; 소 &nbsp; 장</div>
+
+            <div class="doc-block">
+                <p><strong>고&nbsp;&nbsp;소&nbsp;&nbsp;인</strong> : 철수, 영구, 진명 외 24명</p>
+                <p>주&nbsp;&nbsp;소 : 서울시 명상구 사기동</p>
+                <br>
+                <p><strong>피고소인</strong> : 김백수</p>
+                <p>주&nbsp;&nbsp;소 : 범죄시 도박구 사기동</p>
+            </div>
+
+            <div class="section-title">고 &nbsp; 소 &nbsp; 취 &nbsp; 지</div>
+
+            <p class="doc-paragraph">
+                피고소인은 고소인들을 속여 고소인들로부터 총 금 3,000만원을 편취한 자들입니다.
+                이에 피고소인을 철저히 조사하여 법에 따라 처벌하여 주시기 바랍니다.
+            </p>
+
+            <div class="section-title">고 &nbsp; 소 &nbsp; 이 &nbsp; 유</div>
+
+            <ol class="reason-list">
+                <li>
+                    고소인은 피고소인들과 아무런 친·인척관계가 없으며, 피고소인 일당은
+                    ○○시 ○○구 ○○동에서 투자 명목 채팅방을 개설하여 고소인과 처음 알게 된 사이입니다.
+                </li>
+                <li>
+                    피고소인들은 20○○년 ○월 ○일경, “투자 대행 리딩방”을 개설하여
+                    고소인들에게 인당 평균 약 3,000만원의 현금을 갈취하였습니다.
+                    또한 피고소인은 악성코드를 배포하고 스마트폰 잠금 해제를 빌미로
+                    추가적으로 1억원을 요구하였습니다.
+                </li>
+                <li>
+                    위와 같은 일련의 행위는 명백한 사기 및 협박 범죄로,
+                    고소인은 피고소인들의 엄벌을 촉구합니다.
+                </li>
+            </ol>
+
+            <div id="btn">엔딩 계속 보기 ▶</div>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("btn").onclick = () => {
+            window.location.href = "ending_slide.html";
+        };
+    </script>
+
+</body>
+
+</html>

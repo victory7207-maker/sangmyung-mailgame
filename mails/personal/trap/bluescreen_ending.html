@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>시스템 오류</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #0b4cff;
+            /* 블루스크린 파란색 */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            padding: 40px;
+        }
+
+        .error-box {
+            max-width: 800px;
+            line-height: 1.5;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .maintitle {
+            font-size: 90px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 44px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .desc {
+            font-size: 22px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .progress {
+            font-size : 20px;
+            margin-top: 40px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .warning-box {
+            position:fixed;
+            top : 50%;
+            left : 50%;
+            transform : translate(-50%, -50%);
+            width: 520px;
+            background: white;
+            border: 2px solid black;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity : 0;
+            animation: fadeIn 1.5s ease-out 5.5s forwards;
+        }
+
+        .warning-top {
+            width: 100%;
+            background: #01007a;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 2px solid black;
+            padding : 6px 10px;
+        }
+
+        .warning-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .warning-icon img {
+            width: 32px;
+            height: auto;
+        }
+
+        .warn-text {
+            font-size: 15px;
+            color: black;
+            font-weight: 500;
+            word-break: keep-all;
+            max-width: 450px;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        span {
+            padding: 1px;
+            background-color: red;
+            color: white;
+            border-radius: 3px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="error-box">
+
+        <div class="maintitle">Ending : Chapter01 </div>
+
+        <div class="title">
+            PC에 문제가 발생하여 재시작해야 합니다.<br>
+            오류 수집 중입니다.
+        </div>
+
+        <div class="desc">
+            오류 코드: YOU.SHOULD.BE.CAREFUL
+            시스템이 심각한 멀웨어 활동을 감지했습니다.<br>
+            작은 부주의가 시스템 전체를 무너뜨릴 수 있습니다.
+            디지털 선택은 언제나 신중해야 합니다.
+        </div>
+
+        <div class="progress">
+            오류 수집 중...
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-top">랜섬웨어 감염 경고</div>
+            <div class="warning-content">
+                    <div class="warn-icon">
+                        <img src="./lock.png">
+                    </div>
+                    <div class="warn-text">
+                        당신의 컴퓨터는 여러 악성코드에 감염되었습니다!
+                        랜섬웨어가 숨어 있을 수 있는 의심스러운 메일들을 주의하여
+                        다시 도전해보세요!
+                        <p>(창을 닫고 <span>"입장하기"</span>를 눌러주세요)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>엔딩</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #fff;
+            overflow: hidden;
+            font-family: "Pretendard", sans-serif;
+        }
+
+        /* 슬라이드 전체 영역 */
+        #slide-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* 이미지 */
+        .slide {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1100px;
+            height: auto;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* 화살표 */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 70px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+        .arrow:hover {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        #left-arrow {
+            left: 40px;
+        }
+
+        #right-arrow {
+            right: 40px;
+        }
+
+        /* 하단 스탯 */
+        #stats {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+            font-size: 22px;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="slide-container">
+
+        <div id="left-arrow" class="arrow">◀</div>
+        <div id="right-arrow" class="arrow">▶</div>
+
+        <div id="stats"></div>
+    </div>
+
+    <script>
+        let number = Number(sessionStorage.getItem("karma"));
+
+        const ethicalSlides = [
+            "slide_img/ethical1.png",
+            "slide_img/ethical1.png",
+            "slide_img/ethical2.png",
+            "slide_img/ethical3.png",
+            "slide_img/ethical4.png"
+        ];
+
+        const unethicalSlides = [
+            "slide_img/unethical1.png",
+            "slide_img/unethical2.png",
+            "slide_img/unethical3.png",
+            "slide_img/unethical4.png",
+            "slide_img/unethical5.png",
+            "slide_img/unethical6.png"
+        ];
+
+        const slides = number <= 0 ? ethicalSlides : unethicalSlides;
+
+
+        // ===== 2) 슬라이드 DOM 생성 =====
+        const container = document.getElementById("slide-container");
+
+        slides.forEach((src, i) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.classList.add("slide");
+            if (i === 0) img.classList.add("active");
+            container.appendChild(img);
+        });
+
+        let current = 0;
+        const slideEls = document.querySelectorAll(".slide");
+
+        // ===== 3) 슬라이드 변경 함수 =====
+        function showSlide(idx) {
+            slideEls.forEach(s => s.classList.remove("active"));
+            slideEls[idx].classList.add("active");
+        }
+
+        // ===== 4) 화살표 컨트롤 =====
+        document.getElementById("left-arrow").onclick = () => {
+            current = (current - 1 + slides.length) % slides.length;
+            showSlide(current);
+        };
+
+        document.getElementById("right-arrow").onclick = () => {
+            current = (current + 1) % slides.length;
+            showSlide(current);
+        };
+
+        // ===== 5) 하단 스탯 표시 =====
+        let fame = sessionStorage.getItem("fame");
+        let karma = sessionStorage.getItem("karma");
+        let pollution = sessionStorage.getItem("pollution_degree");
+
+        document.getElementById("stats").textContent =
+            `명성 : ${fame}  |  업보 : ${karma}  |  오염도 : ${pollution}`;
+
+    </script>
+
+</body>
+
+</html>

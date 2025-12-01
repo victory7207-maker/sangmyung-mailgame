@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>보안 검증 퀴즈</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Malgun Gothic', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 500px;
+        }
+        h2 { color: #2c3e50; margin-bottom: 30px; }
+        .question { font-size: 1.2rem; margin-bottom: 30px; font-weight: bold; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover { background-color: #2980b9; transform: scale(1.02); }
+        .timer { margin-top: 20px; color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <h2>보안 검증 프로세스</h2>
+        <div id="question-text" class="question">문제 로딩 중...</div>
+        <div id="options-area" class="btn-grid">
+            </div>
+        <div class="timer">남은 시간: <span id="time-left">15</span>초</div>
+    </div>
+
+    <script>
+        const quizDB = [
+            { q: "다음 중 안전한 비밀번호 설정 방법은?", a: ["123456", "생년월일", "특수문자 포함 8자 이상", "휴대폰 번호"], correct: 2 },
+            { q: "공공기관이 이메일로 절대 요구하지 않는 것은?", a: ["협조 요청", "주민번호 및 계좌비밀번호", "민원 안내", "공지사항"], correct: 1 },
+            { q: "출처를 알 수 없는 URL을 받았을 때 행동으로 옳은 것은?", a: ["즉시 클릭한다", "친구에게 전달한다", "클릭하지 않고 삭제/신고한다", "PC로 접속해본다"], correct: 2 },
+            { q: "PC가 랜섬웨어에 감염되었을 때 가장 먼저 할 일은?", a: ["랜선을 뽑아 네트워크 차단", "해커에게 돈 입금", "모니터 끄기", "경찰서 방문"], correct: 0 },
+            { q: "스마트폰에 악성 앱이 설치되는 것을 막기 위한 가장 올바른 방법은?", a: ["문자로 온 URL 눌러서 설치", "공식 앱스토어(Play스토어 등)만 이용", "블로그 첨부파일 다운로드", "친구가 보내준 설치파일 실행"], correct: 1 },
+            { q: "2단계 인증(2FA)을 설정해야 하는 가장 큰 이유는 무엇일까요?", a: ["로그인 속도가 빨라져서", "비밀번호를 기억할 필요가 없어서", "비밀번호가 털려도 계정을 보호할 수 있어서", "친구와 계정을 공유하기 편해서"], correct: 2 },
+            { q: "카페 등 공공 장소에서 무료 와이파이(Wi-Fi)를 쓸 때 주의할 점은?", a: ["금융 거래나 중요 로그인을 피한다", "모든 사이트에 자동 로그인한다", "비밀번호 없는 와이파이를 골라 쓴다", "공유 폴더 기능을 켜둔다"], correct: 0 },
+            { q: "윈도우나 백신 프로그램의 '보안 업데이트' 알림이 떴을 때 올바른 행동은?", a: ["귀찮으니 영구적으로 끈다", "바이러스일 수 있으니 삭제한다", "보안 취약점 해결을 위해 즉시 업데이트한다", "한 달 뒤에 몰아서 한다"], correct: 2 },
+            { q: "검찰이나 금융감독원을 사칭하는 전화를 받았을 때 가장 적절한 대처법은?", a: ["시키는 대로 계좌 비밀번호를 알려준다", "불러주는 앱을 설치하여 확인한다", "즉시 전화를 끊고 해당 기관 대표번호로 확인한다", "겁을 먹고 돈을 송금한다"], correct: 2 },
+            { q: "중요한 데이터를 랜섬웨어나 고장으로부터 지키기 위한 가장 확실한 방법은?", a: ["바탕화면에 복사본을 만든다", "정기적으로 외장하드나 클라우드에 백업한다", "컴퓨터를 끄지 않고 켜둔다", "파일 이름을 복잡하게 바꾼다"], correct: 1 }
+        ];
+
+        let currentQuiz;
+        let timer;
+        let timeLeft = 15;
+
+        window.onload = function() {
+            const randomIndex = Math.floor(Math.random() * quizDB.length);
+            currentQuiz = quizDB[randomIndex];
+            
+            document.getElementById('question-text').innerText = "Q. " + currentQuiz.q;
+            
+            const optionsArea = document.getElementById('options-area');
+            currentQuiz.a.forEach((text, index) => {
+                const btn = document.createElement('button');
+                btn.innerText = text;
+                btn.onclick = () => checkAnswer(index);
+                optionsArea.appendChild(btn);
+            });
+
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time-left').innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    alert("시간 초과! 보안 검증 실패.");
+                    finishMission(false);
+                }
+            }, 1000);
+        };
+
+        function checkAnswer(selectedIndex) {
+            clearInterval(timer);
+            
+            if (selectedIndex === currentQuiz.correct) {
+                alert("정답입니다! 보안 검증 완료.");
+                finishMission(true);
+            } else {
+                alert("오답입니다! 보안 검증 실패.");
+                finishMission(false);
+            }
+        }
+    </script>
+
+    <script src="../function/database.js"></script>
+    <script src="../function/mailLogs.js"></script>
+    <script src="../function/gameSuccess.js"></script>
+
+</body>
+</html>

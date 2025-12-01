@@ -1,0 +1,126 @@
+<!-- 
+ id : 9,
+ type : "ads",
+ title : "과거가 살아숨쉬는 순간, 도시속의 궁궐을 만나다."
+ time : "21:41"
+ size : 4,
+ from : "🔒seoulcity@goomail.com",
+ link : "seoulcity.html"
+ -->
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>광고 메일</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Pretendard", sans-serif;
+        }
+
+        body {
+            background: #ececec;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        /* 메일 전체 영역 */
+        .mail-container {
+            width: 60vw;
+            /* 1920 기준 약 1152px */
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            padding: 40px 50px;
+        }
+
+        /* 제목 */
+        .mail-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* 발신자 정보 */
+        .mail-info {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* 본문 */
+        .mail-body {
+            margin-top: 20px;
+        }
+
+        .mail-body img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        /* 버튼 영역 */
+        .btn-area {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .danger {
+            background: #ff4f4f;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="mail-container">
+
+        <div class="mail-title">[광고] 한국 궁궐 기행</div>
+
+        <div class="mail-info">
+            보낸이: 🔒seoulcity@goomail.com<br>
+        </div>
+
+        <div class="mail-body">
+            <!-- 광고 이미지 -->
+            <img src="../ads.img/2.seoulcity.png" alt="광고 이미지">
+        </div>
+
+        <div class="btn-area">
+            <div class="btn" onclick="history.back()">닫기</div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

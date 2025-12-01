@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>시스템 침투</title>
+    <style>
+        body { margin: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Courier New', monospace; user-select: none; cursor: pointer; text-align: center; color: white; background-color: #cf2e2e; /* 초기 빨간색 */ }
+        h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+        p { font-size: 1.2rem; margin-top: 10px; opacity: 0.8; }
+        #message { font-weight: bold; font-size: 1.5rem; margin-top: 20px; min-height: 30px;}
+    </style>
+</head>
+<body onmousedown="handleClick()">
+
+    <h1 id="title">WAIT...</h1>
+    <p id="sub-text">화면이 초록색이 되면 즉시 클릭하세요!</p>
+    <div id="message"></div>
+
+    <script>
+        let startTime = 0;
+        let isGreen = false;
+        let timeoutId;
+        const body = document.body;
+        const title = document.getElementById('title');
+        const subText = document.getElementById('sub-text');
+
+        function prepareGame() {
+            const randomDelay = Math.floor(Math.random() * 3000) + 2000;
+            
+            timeoutId = setTimeout(() => {
+                body.style.backgroundColor = "#2ecc71";
+                title.innerText = "CLICK NOW!!!";
+                subText.innerText = "지금 누르세요!!!";
+                isGreen = true;
+                startTime = Date.now();
+            }, randomDelay);
+        }
+
+        function handleClick() {
+            if (isGreen) {
+                const reactionTime = Date.now() - startTime;
+                
+                if (reactionTime <= 400) {
+                    alert(`침투 성공! (반응속도: ${reactionTime}ms)`);
+                    finishMission(true);
+                } else {
+                    alert(`너무 느립니다... (반응속도: ${reactionTime}ms)\n보안 시스템에 발각되었습니다.`);
+                    finishMission(false);
+                }
+
+            } else {
+                clearTimeout(timeoutId);
+                alert("너무 빨리 눌렀습니다! 침투 실패.");
+                finishMission(false);
+            }
+        }
+
+        prepareGame();
+    </script>
+
+    <script src="../function/database.js"></script>
+    <script src="../function/mailLogs.js"></script>
+    <script src="../function/gameSuccess.js"></script>
+
+</body>
+</html>
