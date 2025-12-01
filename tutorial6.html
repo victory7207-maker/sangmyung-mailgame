@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920,height=1080, initial-scale=1.0">
+    <title> 튜토리얼 </title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    html,
+    body {
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 90%;
+        background-color: #0d1328;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        font-family: 'Noto Sans KR', sans-serif;
+        color: white;
+    }
+
+    p {
+        margin: auto 20px;
+        text-align: center;
+    }
+
+    .selection {
+        display: flex;
+        align-items: center;
+        color: white;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    .btn {
+        background: #4a6fa5;
+        color: #fff;
+        font-size: 22px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:hover {
+        background: #6b8dc7;
+        transform: scale(1.03);
+    }
+
+    .left {
+        padding: 10px 20px;
+        margin-right: 10px;
+    }
+
+    .right {
+        padding: 10px 20px;
+    }
+
+    .main-image {
+        max-width: 50%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    span {
+        color: yellow;
+    }
+</style>
+
+<body>
+
+    <h1> &lt;튜토리얼&gt;</h1>
+
+    <img src="blog.png" alt="메인화면 이미지" class="main-image">
+
+    <p> 아, 한가지 더 말씀드릴게 있어요! <br>
+        만약 받은 메일들을 모두 처리했다면 어떻게 할까요? <br>
+        <span>블로그에 일기를 남기면 다음날로 넘어가고 새로운 메일들을 받을 수 있습니다.</span> <br>
+        다만 다음날로 넘어가면 생활비가 빠져나가니 열심히 일을 해서 돈을 벌어야 할 거에요...
+    </p>
+
+
+    <div class="selection">
+        <div class="btn left" onclick="location.href='tutorial5.html'"> 이전 </div>
+        <div class="btn right" onclick="location.href='tutorial7.html'"> 다음 </div>
+    </div>
+
+    <!-- <script src="sizing.js"></script> 이후에 설정 -->
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그</title>
+    <style>
+        /* 기존 스타일 유지 */
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            margin: 0;
+            background-color: #e6f2f2;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        .container {
+            width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* 메인 화면으로 돌아가기 버튼 */
+        .back-button-blog {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: 8px;
+            z-index: 10;
+        }
+        .back-button-blog:hover { background: rgba(0, 0, 0, 0.7); }
+
+        /* 헤더 */
+        .header-banner {
+            height: 300px;
+            background-color: white;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .profile-area {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #d1e0e0;
+            border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: #f0f0f0;
+            overflow: hidden;
+        }
+        .profile-pic svg { width: 60%; height: 60%; fill: #fff; opacity: 0.8; }
+        .write-button { display: none; }
+
+        /* 메뉴바 */
+        .blog-title-bar {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background-color: #fcfcfc;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 메인 레이아웃 */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            background-color: #f9f9f9;
+            min-height: 600px; /* 높이 고정 */
+        }
+
+        /* 사이드바 */
+        .sidebar-left { width: 240px; flex-shrink: 0; }
+        .widget { background-color: #fff; border: 1px solid #ddd; margin-bottom: 20px; }
+        .widget-title { font-size: 0.9rem; font-weight: bold; padding: 12px; border-bottom: 1px solid #eee; margin: 0; }
+        
+        /* 사이드바 메뉴 스타일 수정 */
+        .widget-content ul li {
+            padding: 12px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        .widget-content ul li:hover { background-color: #f0f7ff; color: #007bff; font-weight: bold; }
+        .widget-content ul li.active { background-color: #e3f2fd; color: #0056b3; font-weight: bold; border-left: 4px solid #0056b3; }
+
+        /* 콘텐츠 메인 */
+        .content-main {
+            flex-grow: 1;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 30px;
+        }
+
+        /* 탭 구역 (JS로 토글됨) */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* 1. 소개글 스타일 */
+        .intro-box { line-height: 1.8; font-size: 0.95rem; }
+        .intro-title { font-size: 1.5rem; font-weight: bold; color: #4a6fa5; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .intro-text p { margin-bottom: 15px; }
+        .intro-text strong { background: linear-gradient(to top, #ffefba 50%, transparent 50%); }
+        .email-info { background-color: #f0f7ff; padding: 15px; border-radius: 8px; font-weight: bold; text-align: center; color: #333; margin-top: 20px; border: 1px dashed #4a6fa5; }
+
+        /* 2. 일기장 스타일 (기존 유지) */
+        .post-title { font-size: 1.5rem; margin-top: 0; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #333; }
+        #diary-textarea { width: 100%; height: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1rem; line-height: 1.6; margin-bottom: 15px; }
+        #save-diary-btn { background: #007bff; color: white; border: none; padding: 12px 20px; font-size: 1rem; font-weight: 700; border-radius: 5px; cursor: pointer; }
+        #save-diary-btn:hover { background: #0056b3; }
+        #save-diary-btn:disabled { background: #aaa; cursor: not-allowed; }
+        #diary-history { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        #diary-history li { background-color: #f9f9f9; border: 1px solid #eee; border-radius: 4px; padding: 15px; margin-bottom: 10px; }
+        
+        /* 3. 의뢰 기록 스타일 */
+        .request-item { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; background-color: #fdfdfd; }
+        .request-title { font-size: 1.1rem; font-weight: bold; color: #2c3e50; margin-bottom: 8px; }
+        .request-content { font-size: 0.95rem; color: #555; line-height: 1.5; }
+        .empty-request { text-align: center; color: #999; padding: 50px 0; }
+
+        /* 이웃 위젯 스타일 */
+        .neighbor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px; }
+        .neighbor-item { text-align: center; }
+        .neighbor-pic { width: 100%; padding-bottom: 100%; height: 0; margin-bottom: 5px; }
+        .neighbor-name { font-size: 0.8rem; color: #666; }
+        .n1 { background-color: #fadadd; } .n2 { background-color: #d8bfff; } .n3 { background-color: #c0e7ff; }
+        .n4 { background-color: #fff5ba; } .n5 { background-color: #d1b1a1; } .n6 { background-color: #b0f2c2; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="main.html" class="back-button-blog"> &lt; 메인 화면으로 돌아가기</a>
+
+        <header class="header-banner">
+            <div class="profile-area">
+                <div class="profile-pic">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                    </svg>
+                </div>
+                <div class="write-button">✎ 글쓰기</div>
+            </div>
+        </header>
+
+        <nav class="blog-title-bar">내 블로그</nav>
+
+        <div class="main-content">
+            <aside class="sidebar-left">
+                <div class="widget">
+                    <h3 class="widget-title">Category</h3>
+                    <div class="widget-content">
+                        <ul id="category-list">
+                            <li onclick="switchTab('intro', this)">소개글</li>
+                            <li onclick="switchTab('diary', this)" class="active">일기장</li> <li onclick="switchTab('requests', this)">의뢰 기록</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">나를 추가한 이웃</h3>
+                    <div class="widget-content">
+                        <div class="neighbor-grid">
+                            <div class="neighbor-item"><div class="neighbor-pic n1"></div><div class="neighbor-name">이웃1</div></div>
+                            <div class="neighbor-item"><div class="neighbor-pic n2"></div><div class="neighbor-name">이웃2</div></div>
+                            <div class="neighbor-item"><div class="neighbor-pic n3"></div><div class="neighbor-name">이웃3</div></div>
+                            <div class="neighbor-item"><div class="neighbor-pic n4"></div><div class="neighbor-name">이웃4</div></div>
+                            <div class="neighbor-item"><div class="neighbor-pic n5"></div><div class="neighbor-name">이웃5</div></div>
+                            <div class="neighbor-item"><div class="neighbor-pic n6"></div><div class="neighbor-name">이웃6</div></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content-main">
+                
+                <div id="tab-intro" class="tab-content">
+                    <article class="post">
+                        <h2 class="post-title">블로그 소개</h2>
+                        <div class="post-body">
+                            <div class="intro-text" style="font-size: 1rem; line-height: 1.8; color: #333;">
+                                <p>
+                                    안녕하세요!<br>
+                                    저는 정보보안기사 외 다양한 자격증을 보유하고 있으며<br>
+                                    현재 IT 보안 분야 취업을 위해 포트폴리오를 쌓고있는 취준생<br>
+                                    <strong>김백수</strong>라고 합니다.
+                                </p>
+                                <p>
+                                    저에게 블로그를 시작할 계기를 만들어주신 분은 친한 PC방 사장님입니다.<br>
+                                    사장님께서 새로운 알바생을 뽑으시던 어느 날, 이력서인 줄 알고 누르신 링크가 사실은 악성 URL이었고 그 때문에 PC가 랜섬웨어에 감염되는 일이 있었습니다. 
+                                    제가 이를 해결해 드린 뒤로 사장님께서는 제 작업 방식에 크게 만족하시며 꾸준히 보안 관련 문제들을 맡겨주셨고, 
+                                    <strong>“이 정도 실력이면 더 많은 사람을 도울 수 있다”</strong>며 블로그를 통해 더 많은 의뢰를 받아보는 건 어떻겠냐고 적극 권유해 주셨습니다.
+                                </p>
+                                <p>
+                                    해킹, 피싱, 랜섬웨어 어떤 문제도 맡겨주시면 빠르고 정확하게 해결해 드리겠습니다.<br>
+                                    모든 의뢰는 메일로 받고있으니 아래 주소로 보내주세요.
+                                </p>
+                                
+                                <div class="email-info" style="margin-top: 30px;">
+                                    📧 의뢰 문의 : noemployed@goomail.com
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="tab-diary" class="tab-content active">
+                    <article class="post">
+                        <h2 class="post-title">오늘의 일기</h2>
+                        <div class="post-body">
+                            <textarea id="diary-textarea" placeholder="오늘 있었던 일을 기록해보세요..."></textarea>
+                            <button id="save-diary-btn">일기 저장 (턴 넘기기)</button>
+                            <p id="diary-message" style="color: red; display: none;"></p>
+                        </div>
+                        <div id="diary-history">
+                            <h3>지난 일기</h3>
+                            <ul id="diary-list">
+                                </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="tab-requests" class="tab-content">
+                    <article class="post">
+                        <h2 class="post-title">의뢰 해결 기록</h2>
+                        <div id="requests-list-container">
+                            <div class="empty-request">아직 해결한 의뢰가 없습니다.</div>
+                        </div>
+                    </article>
+                </div>
+
+            </main>
+        </div> 
+    </div> 
+
+    <script src="./function/changeStat.js"></script>
+    <script src="./function/nextDay.js"></script>
+    <script src="./function/updateStatusBar.js"></script>
+    <script src="./function/updateAds.js"></script>
+    <script src="./function/updateNews.js"></script>
+    <script src="./function/afterWriteDiary.js"></script>
+    <script src="./function/blog.js"></script>
+</body>
+</html>

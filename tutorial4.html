@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>튜토리얼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #0d1328;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 70px;
+            margin-bottom: 0;
+        }
+
+        /* 메인 콘텐츠 컨테이너 (위치 및 크기 조정) */
+        .main-content {
+            margin-top: auto;
+            margin-bottom: auto;
+            transform: translateY(-50px);
+
+            width: 75%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p {
+            text-align: center;
+            margin: 0;
+        }
+
+        .welcome-message {
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+
+        .game-section {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #ffffff;
+
+        }
+
+        .question-title {
+            font-size: 30px;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .info-details {
+            margin-bottom: 25px;
+        }
+
+        .detail-text {
+            font-size: 0.9rem;
+            color: #AAAAAA;
+            margin: 3px 0;
+        }
+
+        .choice-buttons {
+            margin-top: 20px;
+        }
+
+        .choice-btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: white;
+        }
+
+        .negative {
+            background-color: #DC3545;
+        }
+
+        .neutral {
+            background-color: #6C757D;
+        }
+
+        .positive {
+            background-color: #28A745;
+        }
+
+        .choice-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* 결과 메시지 스타일 */
+        .result-text {
+            font-size: 20px;
+            margin-top: 40px;
+            min-height: 1.5rem;
+            /* \n을 줄 바꿈으로 인식하게 함 */
+            white-space: pre-line;
+        }
+
+        .selection {
+            display: flex;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #4a6fa5;
+            color: #fff;
+            font-size: 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            background: #6b8dc7;
+            transform: scale(1.03);
+        }
+
+        .left {
+            margin-right: 10px;
+        }
+
+        .highlight-yellow {
+            color: yellow;
+        }
+
+        .link-text {
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .link-text:hover {
+            color: #DC3545;
+        }
+
+        .link-text.clicked {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>&lt;튜토리얼&gt;</h1>
+
+    <div class="main-content">
+        <p class="welcome-message"> 이제 <span class="highlight-yellow">메일을 처리하는 방법</span>에 대해 알아볼까요? </p>
+
+        <div class="game-section">
+            <p class="question-title">Q. 선택지를 눌러주세요!</p>
+            <div class="info-details">
+                <p class="detail-text">의뢰비 : 50$</p>
+                <p class="detail-text" onclick="makeChoice('링크')">
+                    <span class="link-text" id="link-text">
+                        링크 : httpss://trap.example.com
+                    </span>
+            </div>
+            <div class="choice-buttons">
+                <button class="choice-btn negative" onclick="makeChoice('신고하기')">신고하기</button>
+                <button class="choice-btn neutral" onclick="makeChoice('싫어요')">싫어요</button>
+                <button class="choice-btn positive" onclick="makeChoice('좋아요')">좋아요</button>
+            </div>
+        </div>
+
+        <p id="result-message" class="result-text"></p>
+    </div>
+
+    <div class="selection">
+        <div class="btn left" onclick="location.href='tutorial3.html'"> 이전 </div>
+        <div class="btn right" onclick="location.href='tutorial5.html'"> 다음 </div>
+    </div>
+
+    <script>
+        function makeChoice(choice) {
+            const resultElement = document.getElementById('result-message');
+
+            let message = "";
+            let color = "";
+
+            if (choice === '신고하기') {
+
+                message = `메일을 처리하다 보면 가끔 <span class="highlight-yellow">비윤리적인 일을 부탁하는 메일</span>도 있을거에요.
+                        이상한 메일들은 신고하면 <span class="highlight-yellow">'업보'</span>라는 스탯이 줄어듭니다.
+                        <strong>반대로 그런 메일들을 수락한다면 업보가 쌓이고 좋은 엔딩을 보기 어려워집니다.</strong>
+                        아, 잘못 신고해도 패널티는 없으니 안심하세요.`;
+
+            } else if (choice === '싫어요') {
+                message = `의뢰를 <span class="highlight-yellow">거절/무시</span>하셨습니다!
+                         <span class="highlight-yellow">'자금'</span>과 <span class="highlight-yellow">'명성'</span>을 얻지 못합니다.`;
+            } else if (choice === '좋아요') {
+                message = `의뢰를 <span class="highlight-yellow">수락</span>하셨습니다!
+                        성공적으로 메일을 처리하면 <span class="highlight-yellow">'자금'</span>과 <span class="highlight-yellow">'명성'</span>을 얻을 수 있습니다.
+                        돈을 모아 상점에서 아이템을 사거나
+                        <strong>명성을 높여서 좋은 엔딩을 볼 수 있습니다.</strong>`;
+            } else if (choice == '링크') {
+                document.getElementById('link-text').classList.add('clicked');
+                message = `이런, 수상한 링크를 누르셨군요!
+                        간혹 이런 <span class="highlight-yellow">함정들이 숨어있는 메일</span>도 받게됩니다.
+                        함정메일에 당하면 <span class="highlight-yellow">'오염도'</span>라는 스탯이 증가하며
+                        이는 악성코드에 감염되는 것을 뜻합니다. 
+                        <strong>오염도가 쌓이면 컴퓨터가 망가질수 있으니 조심하세요!</strong>`;
+            }
+
+            resultElement.innerHTML = message;
+            resultElement.style.color = color;
+        }
+    </script>
+</body>
+
+</html>
